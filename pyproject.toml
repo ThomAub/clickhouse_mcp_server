@@ -1,0 +1,46 @@
+[project]
+name = "clickhouse-mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "clickhouse-connect>=0.8.10",
+    "clickhouse-driver>=0.2.9",
+    "fastmcp>=0.4.1",
+]
+
+[build-system]
+requires = [ "hatchling",]
+build-backend = "hatchling.build"
+
+[project.scripts]
+clickhouse = "clickhouse_mcp_server:main"
+
+[dependency-groups]
+dev = [
+    "coverage>=7.6.9",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.0",
+    "ruff>=0.8.3",
+    "testcontainers[clickhouse]>=4.9.0",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = "tests"
+python_files = "test_*.py"
+
+[tool.coverage.run]
+branch = true
+omit = ["clickhouse_mcp_server/__init__.py"]
+
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
